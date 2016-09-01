@@ -1,0 +1,3 @@
+rootProject.name = 'GifGrabbr'
+
+include ':app'
