@@ -46,6 +46,7 @@ class GifGrabbr extends Component {
         <TextInput
           style={styles.input}
           onChangeText={(text) => this.setState({ query: text })}
+          onEndEditing={this.handleSearch}
         />
         <View style={styles.gifView}>
           {this.state.initial ? <Initial /> : this.state.loading ? <Spinner /> : <GifDisplay gif={this.state.gif} />}
