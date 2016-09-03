@@ -18,7 +18,7 @@ class App extends Component {
     super()
     this.state = {
       initial: true,
-      loading: true,
+      prefetch: true,
       query: '',
       gif: {}
     }
@@ -27,9 +27,13 @@ class App extends Component {
   }
 
   handleSearch() {
-    this.setState({ initial: false, loading: true });
+    console.log('handleSearch start...');
+    this.setState({ initial: false, prefetch: true });
     getGif(this.state.query)
-      .then((response) => this.setState({ loading: false, gif: response.data }))
+      .then((response) => {
+        console.log('GIPHY API response complete', response.data);
+        this.setState({ prefetch: false, gif: response.data });
+      })
       .catch((error) => console.warn('error', error));
   }
 
@@ -43,7 +47,7 @@ class App extends Component {
           onEndEditing={this.handleSearch}
         />
         <View style={styles.gifView}>
-          {this.state.initial ? <Initial /> : this.state.loading ? <Spinner /> : <GifDisplay gif={this.state.gif} />}
+          {this.state.initial ? <Initial /> : <GifDisplay prefetch={this.state.prefetch} gif={this.state.gif} />}
         </View>
         <TouchableHighlight
           underlayColor='darkslategray'
