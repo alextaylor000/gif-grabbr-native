@@ -45,6 +45,8 @@ class App extends Component {
           style={styles.input}
           onChangeText={(text) => this.setState({ query: text })}
           onEndEditing={this.handleSearch}
+          onSubmitEditing={this.handleSearch}
+          returnKeyType='search'
         />
         <View style={styles.gifView}>
           {this.state.initial ? <Initial /> : <GifDisplay prefetch={this.state.prefetch} gif={this.state.gif} />}
